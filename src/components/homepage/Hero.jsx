@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Hero = () => {
     return (
-        <div className="bg-base-200">
+        <div className="">
             <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-10 py-16 px-4">
 
                 {/* Left Content */}
@@ -18,16 +18,21 @@ const Hero = () => {
                         Explore categories, find your favorites, and start reading today.
                     </p>
 
-                    <Link href="/books">
-                        <button className="btn btn-primary mt-6">
-                            Browse Now
-                        </button>
+                    <Link href="/books" className="btn btn-primary mt-6">
+                        Browse Now
                     </Link>
                 </div>
 
                 {/* Right Image */}
                 <div className="flex-1 flex justify-center">
-                    <Image src={heroBooks} alt="Hero Image Library" className="max-h-150"></Image>
+                    <Image
+                        src={heroBooks}
+                        alt="Hero Image Library"
+                        width={400}
+                        height={400}
+                        className="rounded-lg"
+                    >
+                    </Image>
                 </div>
 
             </div>
