@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
 
 const BookCard = ({ book }) => {
   return (
@@ -31,7 +32,7 @@ const BookCard = ({ book }) => {
           </span>
 
           <span className="text-yellow-500 font-semibold flex justify-center items-center gap-1">
-            <CiStar /> {book.rating}
+            <FaStar /> {book.rating}
           </span>
         </div>
 
