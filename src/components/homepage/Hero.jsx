@@ -24,15 +24,14 @@ const Hero = () => {
                 </div>
 
                 {/* Right Image */}
-                <div className="flex-1 flex justify-center">
+                <div className="relative h-150 w-120">
                     <Image
                         src={heroBooks}
-                        alt="Hero Image Library"
-                        width={400}
-                        height={400}
-                        className="rounded-lg"
-                    >
-                    </Image>
+                        alt="Books"
+                        fill
+                        priority
+                        className="object-cover rounded-lg"
+                    />
                 </div>
 
             </div>
