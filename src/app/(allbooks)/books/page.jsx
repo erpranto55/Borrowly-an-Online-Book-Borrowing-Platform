@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import booksData from "@/data/books.json";
 import BookCard from "@/components/shared/BookCard";
 
@@ -9,6 +11,16 @@ const categories = ["All", "Story", "Tech", "Science", "History", "Self-Developm
 const BooksPage = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [search, setSearch] = useState("");
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const categoryFromURL = searchParams.get("category");
+
+        if (categoryFromURL) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setSelectedCategory(categoryFromURL);
+        }
+    }, [searchParams]);
 
     const filteredBooks = booksData.filter((book) => {
         const matchCategory =
