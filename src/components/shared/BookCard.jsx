@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { CiStar } from "react-icons/ci";
 
 const BookCard = ({ book }) => {
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl hover:scale-105 transition duration-300">
-      
-      {/* Image */}
+
       <figure className="relative w-full h-60">
         <Image
           src={book.image_url}
@@ -18,7 +18,6 @@ const BookCard = ({ book }) => {
         />
       </figure>
 
-      {/* Content */}
       <div className="card-body">
         <h2 className="card-title">{book.title}</h2>
 
@@ -26,18 +25,16 @@ const BookCard = ({ book }) => {
           {book.author}
         </p>
 
-        {/* Category + Rating */}
         <div className="flex justify-between items-center mt-2">
           <span className="badge badge-outline">
             {book.category}
           </span>
 
-          <span className="text-yellow-500 font-semibold">
-            ⭐ {book.rating}
+          <span className="text-yellow-500 font-semibold flex justify-center items-center gap-1">
+            <CiStar /> {book.rating}
           </span>
         </div>
 
-        {/* Button */}
         <div className="card-actions mt-4">
           <Link
             href={`/books/${book.id}`}

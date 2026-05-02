@@ -23,7 +23,7 @@ const updates = [
 
 const MarqueeSection = () => {
     return (
-        <div className="container mx-auto flex items-center gap-4  py-3 px-4 mt-6 rounded-md">
+        <div className="container mx-auto flex items-center gap-4  py-3 px-4 m-6 rounded-md">
 
             {/* Label */}
             <button className="btn bg-primary text-white">
