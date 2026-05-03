@@ -1,15 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [user, setUser] = useState(null);
 
   const navLinkClass = (path) =>
     pathname === path
       ? "text-primary border-b-2 border-primary pb-1"
       : "hover:text-primary";
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <div className="bg-gray-100 shadow-sm sticky top-0 z-50">
@@ -33,11 +43,22 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Right */}
         <div>
-          <Link href="/login" className="btn btn-primary">
-            Login
-          </Link>
+          {user ? (
+            <button
+              className="btn btn-outline"
+              onClick={() => {
+                localStorage.removeItem("user");
+                setUser(null);
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link href="/login" className="btn btn-primary">
+              Login
+            </Link>
+          )}
         </div>
 
       </div>

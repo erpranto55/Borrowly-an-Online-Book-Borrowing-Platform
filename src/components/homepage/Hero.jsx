@@ -27,8 +27,9 @@ const Hero = () => {
                         src={heroBooks}
                         alt="Books"
                         fill
-                        priority
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover rounded-lg"
+                        priority
                     />
                 </div>
 
