@@ -1,75 +1,87 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { Check } from "@gravity-ui/icons";
+import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
-    const router = useRouter();
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleLogin = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const userData = Object.fromEntries(formData.entries());
+        console.log("Form Data Submitted", userData);
+        const { data, error } = await authClient.signIn.email({
+            email: userData.email,
+            password: userData.password,
+            rememberMe: true,
+            // callbackURL: "/",
+        });
 
-        if (email === "admin@gmail.com" && password === "123456") {
-            localStorage.setItem("user", JSON.stringify({ email }));
-            router.push("/");
-        } else {
-            alert("Invalid credentials");
+        console.log("Sign In Response:", { data, error });
+
+        if (error) {
+            toast.error("Error SingingIn: " + error.message);
+        }
+        if (data) {
+            toast.success("Sign In Successful!")
         }
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh]">
-            <div className="w-full max-w-md p-8 bg-base-200 rounded-lg shadow-md">
-
-                <h2 className="text-2xl font-bold text-center mb-6">
-                    Login to Borrowly
-                </h2>
-
-                <form onSubmit={handleLogin} className="space-y-4">
-
-                    <div>
-                        <label className="label">Email</label>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="input input-bordered w-full"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label className="label">Password</label>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            className="input input-bordered w-full"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <button className="btn btn-primary w-full">
-                        Login
-                    </button>
-                </form>
-
-                <p className="text-sm mt-4 text-center">
-                    Don&apos;t have an account?{" "}
-                    <span
-                        onClick={() => router.push("/register")}
-                        className="text-primary cursor-pointer"
+        <div className="flex justify-center items-center min-h-[80vh] px-4">
+            <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+                <TextField
+                    isRequired
+                    name="email"
+                    type="email"
+                    validate={(value) => {
+                        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                            return "Please enter a valid email address";
+                        }
+                        return null;
+                    }}
+                >
+                    <Label>Email</Label>
+                    <Input name="email" placeholder="Your Email" />
+                    <FieldError />
+                </TextField>
+                <TextField
+                    isRequired
+                    minLength={8}
+                    name="password"
+                    type="password"
+                    validate={(value) => {
+                        if (value.length < 8) {
+                            return "Password must be at least 8 characters";
+                        }
+                        if (!/[A-Z]/.test(value)) {
+                            return "Password must contain at least one uppercase letter";
+                        }
+                        if (!/[0-9]/.test(value)) {
+                            return "Password must contain at least one number";
+                        }
+                        return null;
+                    }}
+                >
+                    <Label>Password</Label>
+                    <Input name="password" placeholder="Enter your password" />
+                    <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
+                    <FieldError />
+                </TextField>
+                <div className="flex gap-2">
+                    <Button
+                        type="submit"
+                        className="bg-blue-600 text-white hover:bg-blue-700"
                     >
-                        Register
-                    </span>
-                </p>
-
-            </div>
+                        <Check />
+                        SignUp
+                    </Button>
+                    <Button type="reset" variant="secondary">
+                        Reset
+                    </Button>
+                </div>
+            </Form>
         </div>
     );
 };
