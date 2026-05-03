@@ -62,7 +62,7 @@ export default function ProfilePage() {
                     <strong>Email:</strong> {user.email}
                 </p>
 
-                <Link href="/profile/update" className="btn btn-outline">
+                <Link href="/update" className="btn btn-outline">
                     Update Profile
                 </Link>
             </div>
