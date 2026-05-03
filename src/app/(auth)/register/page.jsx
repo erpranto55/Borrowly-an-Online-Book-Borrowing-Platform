@@ -1,106 +1,90 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import { Check } from "@gravity-ui/icons";
+import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Link from "next/link";
-import { useState } from "react";
 
 const RegisterPage = () => {
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const userData = Object.fromEntries(formData.entries());
+        console.log("Form Data Submitted", userData);
+        const { data, error } = await authClient.signUp.email({
+            name: userData.name,
+            email: userData.email,
+            password: userData.password,
+        })
 
-        if (form.password !== form.confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-
-        console.log("Form Data:", form);
-        alert("Register UI ready (Backend later)");
+        console.log("Sign Up Response:", { data, error });
     };
 
     return (
         <div className="flex justify-center items-center min-h-[80vh] px-4">
-            <div className="w-full max-w-md bg-base-200 p-8 rounded-xl shadow-md">
-
-                <h2 className="text-3xl font-bold text-center mb-6">
-                    Create Account
-                </h2>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-
-                    <div>
-                        <label className="label">Full Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Enter your name"
-                            className="input input-bordered w-full"
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label className="label">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            className="input input-bordered w-full"
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label className="label">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter password"
-                            className="input input-bordered w-full"
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label className="label">Confirm Password</label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Confirm password"
-                            className="input input-bordered w-full"
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    <button className="btn btn-primary w-full mt-2">
-                        Register
-                    </button>
-                </form>
-
-                <p className="text-sm text-center mt-4">
-                    Already have an account?{" "}
-                    <Link href="/login" className="text-primary font-medium">
-                        Login
-                    </Link>
-                </p>
-
-            </div>
+            <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+                <TextField
+                    isRequired
+                    name="name"
+                    validate={(value) => {
+                        if (value.length < 3) {
+                            return "Name must be at least 3 characters";
+                        }
+                        return null;
+                    }}
+                >
+                    <Label>Name</Label>
+                    <Input name="name" placeholder="Your Name" />
+                    <FieldError />
+                </TextField>
+                <TextField
+                    isRequired
+                    name="email"
+                    type="email"
+                    validate={(value) => {
+                        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                            return "Please enter a valid email address";
+                        }
+                        return null;
+                    }}
+                >
+                    <Label>Email</Label>
+                    <Input name="email" placeholder="Your Email" />
+                    <FieldError />
+                </TextField>
+                <TextField
+                    isRequired
+                    minLength={8}
+                    name="password"
+                    type="password"
+                    validate={(value) => {
+                        if (value.length < 8) {
+                            return "Password must be at least 8 characters";
+                        }
+                        if (!/[A-Z]/.test(value)) {
+                            return "Password must contain at least one uppercase letter";
+                        }
+                        if (!/[0-9]/.test(value)) {
+                            return "Password must contain at least one number";
+                        }
+                        return null;
+                    }}
+                >
+                    <Label>Password</Label>
+                    <Input name="password" placeholder="Enter your password" />
+                    <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
+                    <FieldError />
+                </TextField>
+                <div className="flex gap-2">
+                    <Button type="submit">
+                        <Check />
+                        SignUp
+                    </Button>
+                    <Button type="reset" variant="secondary">
+                        Reset
+                    </Button>
+                </div>
+            </Form>
         </div>
     );
 };
