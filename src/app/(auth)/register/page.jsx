@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
     const onSubmit = async (e) => {
@@ -15,9 +16,17 @@ const RegisterPage = () => {
             name: userData.name,
             email: userData.email,
             password: userData.password,
+            callbackURL: '/profile'
         })
 
         console.log("Sign Up Response:", { data, error });
+
+        if (error) {
+            toast.error("Error Singing Up: " + error.message);
+        }
+        if (data) {
+            toast.success("Sign Up Successful!")
+        }
     };
 
     return (
@@ -76,7 +85,10 @@ const RegisterPage = () => {
                     <FieldError />
                 </TextField>
                 <div className="flex gap-2">
-                    <Button type="submit">
+                    <Button
+                        type="submit"
+                        className="bg-blue-600 text-white hover:bg-blue-700"
+                    >
                         <Check />
                         SignUp
                     </Button>

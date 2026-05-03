@@ -5,7 +5,8 @@ import dns from "node:dns/promises";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const client = new MongoClient(process.env.AUTH_DB_URI);
-const db = client.db();
+await client.connect();
+const db = client.db("borrowly-db");
 
 export const auth = betterAuth({
   emailAndPassword: {
