@@ -46,7 +46,9 @@ export default function ProfilePage() {
                 <Image
                     src={user.image || "https://i.ibb.co/4pDNDk1/avatar.png"}
                     alt="profile"
-                    className="w-24 h-24 rounded-full mx-auto"
+                    width={96}
+                    height={96}
+                    className="rounded-full mx-auto"
                 />
                 <p><strong>Name:</strong> {user.name}</p>
                 <p><strong>Email:</strong> {user.email}</p>
