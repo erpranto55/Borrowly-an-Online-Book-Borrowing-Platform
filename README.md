@@ -1,6 +1,6 @@
 # Borrowly - Book Borrowing Platform
 
-Borrowly is a modern web application where users can explore, browse, and borrow books easily. It provides authentication, categorized browsing, and a smooth UI experience.
+Borrowly is a modern web application where users can explore, browse, and borrow books easily. It provides authentication, categorized browsing, and a smooth UI experience.<br>
 
 ---
 
@@ -12,55 +12,46 @@ Borrowly is a modern web application where users can explore, browse, and borrow
 
 ## Features
 
-- User Authentication (Email & Google Login)
-- Browse and explore books
-- Category-based filtering
-- User profile management
-- Fast and responsive UI
-- Fully deployed on Vercel
+- User Authentication (Email & Google Login)<br>
+- Browse and explore books<br>
+- Category-based filtering<br>
+- User profile management<br>
+- Fast and responsive UI<br>
+- Fully deployed on Vercel<br>
 
 ---
 
 ## Tech Stack
 
-- **Frontend:** Next.js
-- **UI:** Tailwind CSS + HeroUI +dailyUI
-- **Authentication:** Custom Auth Client (Email + Google OAuth)
-- **State Management:** React Hooks
-- **Notifications:** React Toastify
-- **Deployment:** Vercel
+- **Frontend:** Next.js<br>
+- **UI:** Tailwind CSS + HeroUI +dailyUI<br>
+- **Authentication:** Custom Auth Client (Email + Google OAuth)<br>
+- **State Management:** React Hooks<br>
+- **Notifications:** React Toastify<br>
+- **Deployment:** Vercel<br>
 
 ---
 
 ## Project Structure
 
-src/
-├── app/
-│ ├── page.jsx
-│ ├── login/
-│ ├── register/
-│
-├── components/
-│ ├── homepage/
-│ │ ├── Hero.jsx
-│ │ ├── Categories.jsx
-│ │ ├── FeaturedBooks.jsx
-│ │ ├── WhyChooseUs.jsx
-│ │ ├── Marquee.jsx
-│
-├── lib/
-│ ├── auth-client.js
+src/<br>
+├── app/<br>
+│ ├── page.jsx<br>
+│ ├── login/<br>
+│ ├── register/<br>
+│<br>
+├── components/<br>
+│ ├── homepage/<br>
+│ │ ├── Hero.jsx<br>
+│ │ ├── Categories.jsx<br>
+│ │ ├── FeaturedBooks.jsx<br>
+│ │ ├── WhyChooseUs.jsx<br>
+│ │ ├── Marquee.jsx<br>
+│<br>
+├── lib/<br>
+│ ├── auth-client.js<br>
 
 ---
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/your-username/borrowly.git
-cd borrowly
-```
 
 # Installation & Setup
 
@@ -93,16 +84,18 @@ GOOGLE_CLIENT_SECRET=your_google_secret
 npm run dev
 ```
 
+---
+
 # Authentication
 
-Email/password login using authClient
-Google OAuth (redirect-based)
-Persistent user session
-Toast notifications after successful login
+Email/password login using authClient<br>
+Google OAuth (redirect-based)<br>
+Persistent user session<br>
+Toast notifications after successful login<br>
 
 # Author
 
 ### E.R Pranto
 
-GitHub: [E.R. Pranto](https://github.com/erpranto55)
+GitHub: [E.R. Pranto](https://github.com/erpranto55)<br>
 LinkedIn: [E.R. Pranto](https://www.linkedin.com/in/erpranto55/)
