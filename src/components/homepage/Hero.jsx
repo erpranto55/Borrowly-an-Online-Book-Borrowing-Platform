@@ -17,12 +17,14 @@ const Hero = () => {
             Explore categories, find your favorites, and start reading today.
           </p>
 
-          <Link
-            href="/books"
-            className="btn btn-primary mt-6 inline-block"
-          >
-            Browse Now
-          </Link>
+          <div className="mt-6 flex justify-center lg:justify-start">
+            <Link
+              href="/books"
+              className="btn btn-primary"
+            >
+              Browse Now
+            </Link>
+          </div>
         </div>
 
         <div className="flex-1 w-full">
