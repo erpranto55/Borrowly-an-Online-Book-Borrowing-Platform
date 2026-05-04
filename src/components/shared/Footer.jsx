@@ -27,6 +27,7 @@ const Footer = () => {
             <div className="space-y-2 text-sm flex flex-col">
               <Link href="/" className="hover:text-primary">Home</Link>
               <Link href="/books" className="hover:text-primary">All Books</Link>
+              <Link href="/profile" className="hover:text-primary">My Profile</Link>
             </div>
           </div>
 
