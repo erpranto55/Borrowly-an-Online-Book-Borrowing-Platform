@@ -41,7 +41,7 @@ const BookCard = ({ book }) => {
             href={`/books/${book.id}`}
             className="btn btn-primary btn-sm w-full"
           >
-            View Details
+            Details
           </Link>
         </div>
       </div>

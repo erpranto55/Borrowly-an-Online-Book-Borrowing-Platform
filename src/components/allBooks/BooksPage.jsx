@@ -34,8 +34,17 @@ const BooksPage = () => {
     });
 
     return (
-        <div className="container mx-auto px-4 py-10 ">
+        <div className="container mx-auto px-4 py-10">
 
+            <div className="mb-8 text-center">
+                <input
+                    type="text"
+                    placeholder=" Search books by title or author..."
+                    className="input input-bordered w-full max-w-2xl text-lg"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+            </div>
 
             <div className="flex flex-col lg:flex-row gap-8">
 
@@ -48,8 +57,8 @@ const BooksPage = () => {
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat)}
                                 className={`btn justify-start ${selectedCategory === cat
-                                    ? "btn-primary text-white"
-                                    : "btn-outline"
+                                        ? "btn-primary text-white"
+                                        : "btn-outline"
                                     }`}
                             >
                                 {cat}
@@ -59,19 +68,8 @@ const BooksPage = () => {
                 </div>
 
                 <div className="lg:w-3/4">
-                    <div className="flex justify-between">
-                        <div></div>
-                        <h2 className="font-bold text-3xl">All Books</h2>
-                        <div className="mb-6">
-                            <input
-                                type="text"
-                                placeholder="Search books..."
-                                className="input input-bordered w-full max-w-md"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                        </div>
-                    </div>
+                    <h2 className="font-bold text-3xl mb-6">All Books</h2>
+
                     {filteredBooks.length === 0 ? (
                         <p className="text-gray-500">No books found.</p>
                     ) : (
