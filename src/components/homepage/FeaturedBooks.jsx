@@ -1,29 +1,38 @@
-import Link from "next/link";
+"use client";
+
 import books from "@/data/books.json";
-import Image from "next/image";
-import BookCard from "@/components/shared/BookCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import BookCard from "../shared/BookCard";
 
-const FeaturedBooks = () => {
-
-    const featuredBooks = [...books]
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 4);
-
+const FeaturedBooksSlider = () => {
     return (
-        <div className="container mx-auto px-4 py-16">
-
-            <h2 className="text-3xl font-bold text-center mb-10">
+        <div className="container mx-auto px-4 py-10">
+            <h2 className="text-3xl font-bold mb-6 text-center">
                 Featured Books
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {featuredBooks.map((book) => (
-                    <BookCard key={book.id} book={book} />
+            <Swiper
+                modules={[Autoplay, Pagination]}
+                spaceBetween={20}
+                slidesPerView={1}
+                autoplay={{ delay: 2500 }}
+                pagination={{ clickable: true }}
+                breakpoints={{
+                    640: { slidesPerView: 3 },
+                    1024: { slidesPerView: 4 },
+                }}
+            >
+                {books.slice(0, 6).map((book) => (
+                    <SwiperSlide key={book.id}>
+                        <BookCard key={book.id} book={book} />
+                    </SwiperSlide>
                 ))}
-            </div>
-
+            </Swiper>
         </div>
     );
 };
 
-export default FeaturedBooks;
+export default FeaturedBooksSlider;
