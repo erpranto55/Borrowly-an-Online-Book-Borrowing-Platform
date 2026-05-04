@@ -39,16 +39,21 @@ const LoginPage = () => {
 
         if (data) {
             toast.success("Login Successful!");
-            router.push("/"); 
+            router.push("/");
         }
     };
 
 
     const handleGoogleLogin = async () => {
-        const { error } = await authClient.signIn.social({
+        const { error, data } = await authClient.signIn.social({
             provider: "google",
             callbackURL: "/",
         });
+
+        if (data) {
+            toast.success("Login Successful!");
+            router.push("/");
+        }
 
         if (error) {
             toast.error("Google Login Failed");

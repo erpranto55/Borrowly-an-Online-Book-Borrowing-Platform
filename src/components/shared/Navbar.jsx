@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "@/lib/auth-client";
 import { PersonFill } from '@gravity-ui/icons';
+import Image from "next/image";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -31,12 +32,21 @@ const Navbar = () => {
           {isPending ? (
             <span>Loading...</span>
           ) : session ? (
-            <div className="flex gap-2 items-center">
-              <Link href="/profile" className={navLinkClass("/profile")}>
-                <PersonFill className="size-6" />
+            <div className="flex gap-3 items-center">
+              <span className="text-sm font-medium text-gray-500">
+                Hey, {session?.user?.name?.split(" ")[0] || "User"}
+              </span>
+              <Link href="/profile">
+                <Image
+                  src={session?.user?.image || "/default-avatar.png"}
+                  alt="user"
+                  width={40}
+                  height={40}
+                  className="rounded-full border"
+                />
               </Link>
               <button
-                className="btn btn-outline"
+                className="btn btn-primary"
                 onClick={() => signOut()}
               >
                 Logout
