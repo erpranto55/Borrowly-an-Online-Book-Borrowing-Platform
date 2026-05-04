@@ -50,7 +50,7 @@ export default function UpdateProfilePage() {
 
             const data = await res.json();
 
-            setImage(data.secure_url); // ✅ update preview
+            setImage(data.secure_url);
             toast.success("Image uploaded!");
         } catch (err) {
             toast.error("Image upload failed");
