@@ -14,24 +14,7 @@ export default function ProfilePage() {
             </div>
         );
     }
-
-    if (!session) {
-        return (
-            <div className="flex flex-col justify-center items-center min-h-[70vh] text-center px-4">
-                <h2 className="text-2xl font-bold mb-3">
-                    You are not logged in
-                </h2>
-
-                <p className="text-gray-500 mb-6">
-                    Please login to view your profile.
-                </p>
-
-                <Link href="/login" className="btn btn-primary">
-                    Go to Login
-                </Link>
-            </div>
-        );
-    }
+    
 
     const user = session.user;
 

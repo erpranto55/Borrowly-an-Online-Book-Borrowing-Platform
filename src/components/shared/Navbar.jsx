@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "@/lib/auth-client";
+import { PersonFill } from '@gravity-ui/icons';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -24,19 +25,23 @@ const Navbar = () => {
         <div className="hidden md:flex gap-6 font-medium">
           <Link href="/" className={navLinkClass("/")}>Home</Link>
           <Link href="/books" className={navLinkClass("/books")}>All Books</Link>
-          <Link href="/profile" className={navLinkClass("/profile")}>My Profile</Link>
         </div>
 
         <div>
           {isPending ? (
             <span>Loading...</span>
           ) : session ? (
-            <button
-              className="btn btn-outline"
-              onClick={() => signOut()}
-            >
-              Logout
-            </button>
+            <div className="flex gap-2 items-center">
+              <Link href="/profile" className={navLinkClass("/profile")}>
+                <PersonFill className="size-6" />
+              </Link>
+              <button
+                className="btn btn-outline"
+                onClick={() => signOut()}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <Link href="/login" className="btn btn-primary">
               Login
